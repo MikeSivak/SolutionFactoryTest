@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@nestjs/common';
 import { User } from './user.entity';
 import { UserDto } from './dto/user.dto';
 import { USER_REPOSITORY } from '../../core/constants';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class UsersService {
@@ -14,6 +15,14 @@ export class UsersService {
 
     async findOneByEmail(email: string): Promise<User> {
         return await this.userRepository.findOne<User>({ where: { email } });
+    }
+
+    async findOneByEmailOrPhone(emailOrPhone: string): Promise<User> {
+        return await this.userRepository.findOne<User>({
+            where: {
+                [Op.or]: [{ email: emailOrPhone }, { phone: emailOrPhone }],
+            }
+        })
     }
 
     async findOneById(id: number): Promise<User> {
