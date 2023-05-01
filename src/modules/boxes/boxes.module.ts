@@ -5,6 +5,7 @@ import { boxesProvider } from './boxes.providers';
 
 @Module({
   providers: [BoxesService, ...boxesProvider],
-  controllers: [BoxesController]
+  controllers: [BoxesController],
+  exports: [BoxesService],
 })
 export class BoxesModule { }

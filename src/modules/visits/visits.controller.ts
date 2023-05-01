@@ -1,4 +1,4 @@
-import { Controller, UseGuards, Get, Post, Put, Delete, Body, Param, NotFoundException } from '@nestjs/common';
+import { Controller, UseGuards, Get, Post, Put, Delete, Body, Request, Param, NotFoundException } from '@nestjs/common';
 import { VisitsService } from './visits.service';
 import { Visit } from './visit.enity';
 import { AuthGuard } from '@nestjs/passport';
@@ -24,8 +24,8 @@ export class VisitsController {
 
     @UseGuards(AuthGuard('jwt'))
     @Post()
-    async create(@Body() visit: VisitDto): Promise<Visit> {
-        const newVisit = await this.visitsService.create(visit);
+    async create(@Body() visit: VisitDto, @Request() req: any): Promise<Visit> {
+        const newVisit = await this.visitsService.create(visit, req.user.id);
         return newVisit;
     }
 
