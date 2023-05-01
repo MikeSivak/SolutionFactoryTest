@@ -1,13 +1,13 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { User } from '../users/user.entity';
-import { CARS_REPOSITORY } from 'src/core/constants';
+import { CAR_REPOSITORY } from 'src/core/constants';
 import { Car } from './car.entity';
 import { CarDto } from './dto/car.dto';
 
 
 @Injectable()
 export class CarsService {
-    constructor(@Inject(CARS_REPOSITORY) private readonly carsRepository: typeof Car) { }
+    constructor(@Inject(CAR_REPOSITORY) private readonly carsRepository: typeof Car) { }
 
     async create(car: CarDto, userId: number): Promise<Car> {
         return await this.carsRepository.create<Car>({ ...car, userId });

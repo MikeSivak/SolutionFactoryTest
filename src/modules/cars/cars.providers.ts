@@ -1,7 +1,7 @@
-import { CARS_REPOSITORY } from "src/core/constants";
+import { CAR_REPOSITORY } from "src/core/constants";
 import { Car } from "./car.entity";
 
 export const carsProviders = [{
-    provide: CARS_REPOSITORY,
+    provide: CAR_REPOSITORY,
     useValue: Car,
 }];
