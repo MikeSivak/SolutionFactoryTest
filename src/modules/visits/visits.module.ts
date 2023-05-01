@@ -8,7 +8,8 @@ import { BoxesModule } from '../boxes/boxes.module';
   providers: [VisitsService, ...visitsProvider],
   controllers: [VisitsController],
   imports: [
-    forwardRef(() => BoxesModule)
+    forwardRef(() => BoxesModule),
   ],
+  exports: [VisitsService],
 })
 export class VisitsModule { }
