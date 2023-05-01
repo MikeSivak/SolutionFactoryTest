@@ -26,11 +26,11 @@ export class CarsService {
         });
     }
 
-    async delete(id: number, userId: number) {
+    async delete(id: number, userId: number): Promise<number> {
         return await this.carsRepository.destroy({ where: { id, userId } });
     }
 
-    async update(id: number, data, userId: number) {
+    async update(id: number, data, userId: number): Promise<any> {
         const [numberOfAffectedRows, [updatedCar]] = await this.carsRepository.update({ ...data }, { where: { id, userId }, returning: true });
 
         return { numberOfAffectedRows, updatedCar };

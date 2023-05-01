@@ -9,7 +9,7 @@ export class BoxesController {
     constructor(private readonly boxesService: BoxesService) { }
 
     @Get()
-    async findAll() {
+    async findAll(): Promise<Box[]> {
         return await this.boxesService.findAll();
     }
 

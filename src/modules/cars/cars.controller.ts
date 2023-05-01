@@ -9,7 +9,7 @@ export class CarsController {
     constructor(private readonly carsService: CarsService) { }
 
     @Get()
-    async findAll() {
+    async findAll(): Promise<Car[]> {
         return await this.carsService.findAll();
     }
 
@@ -41,7 +41,7 @@ export class CarsController {
 
     @UseGuards(AuthGuard('jwt'))
     @Delete(':id')
-    async remove(@Param('id') id: number, @Request() req: any) {
+    async remove(@Param('id') id: number, @Request() req: any): Promise<string> {
         const deleted = await this.carsService.delete(id, req.user.id);
         if (deleted === 0) {
             throw new NotFoundException('This Car doesn\'t exist');
