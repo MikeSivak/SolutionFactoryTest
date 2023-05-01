@@ -39,6 +39,7 @@ export class VisitsController {
         return updatedVisit;
     }
 
+    @UseGuards(AuthGuard('jwt'))
     @Delete(':id')
     async delete(@Param('id') id: number): Promise<string> {
         const deleted = await this.visitsService.delete(id);
