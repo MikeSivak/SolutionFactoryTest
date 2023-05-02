@@ -15,7 +15,7 @@ export class CronjobsService {
     async updateBoxStates() {
         const now = new Date().getTime();
         const bookingTime = now - 60 * 60 * 1000;
-        const isoDate = new Date(new Date(bookingTime).toISOString());
+        const isoDate = new Date(bookingTime).toISOString();
 
         await this.boxesRepository.update({ state: true }, {
             where: {
@@ -23,6 +23,6 @@ export class CronjobsService {
                     [Op.lte]: isoDate,
                 },
             },
-        })
+        });
     }
 }
